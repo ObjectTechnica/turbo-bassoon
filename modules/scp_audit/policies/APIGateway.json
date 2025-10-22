@@ -1,0 +1,1 @@
+{"Statement":[{"Action":["apigateway:POST"],"Condition":{"ForAnyValue:StringNotEqualsIfExists":{"apigateway:Request/EndpointType":["PRIVATE"]}},"Effect":"Deny","Resource":"*","Sid":"DenyPublicRestApiCreationAndModification"}],"Version":"2012-10-17"}

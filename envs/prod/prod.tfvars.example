@@ -1,0 +1,3 @@
+# profile         = "org-prod-mgmt"
+manage_policies   = true
+scp_base_path     = "../../policies"

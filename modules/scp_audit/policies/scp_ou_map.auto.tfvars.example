@@ -1,0 +1,5 @@
+scp_ou_map = {
+  APIGateway = ["Sandbox"]
+  FullAWSAccess = ["Legacy", "Sandbox"]
+  TargetedProtection = ["Legacy", "Sandbox"]
+}

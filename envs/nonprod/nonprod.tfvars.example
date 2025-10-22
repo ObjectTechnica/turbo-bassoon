@@ -1,0 +1,5 @@
+# profile         = "org-nonprod-mgmt"   # already defaulted
+manage_policies   = false
+# When manage_policies is set to false, it wont attempt to import only attach.
+scp_base_path     = "../../policies"
+# You do NOT need to define scp_ou_map here; we’ll pass the exported file separately.

@@ -1,0 +1,66 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "PreventUnencryptedVolumeUsage",
+      "Effect": "Deny",
+      "Action": [
+        "ec2:RunInstances",
+        "ec2:CreateVolume"
+      ],
+      "Resource": "arn:aws:ec2:*:*:volume/*",
+      "Condition": {
+        "Bool": {
+          "ec2:Encrypted": [
+            "false"
+          ]
+        }
+      }
+    },
+    {
+      "Sid": "DontBeLazy",
+      "Effect": "Deny",
+      "Action": [
+        "ec2:ModifySecurityGroupRules",
+        "ec2:CreateSecurityGroup"
+      ],
+      "Resource": "arn:aws:ec2:*:*:security-group/*",
+      "Condition": {
+        "StringLike": {
+          "ec2:ResourceTag/launch-wizard": [
+            "yes"
+          ]
+        }
+      }
+    },
+    {
+      "Sid": "DenyUnencryptedRDS",
+      "Effect": "Deny",
+      "Action": [
+        "rds:RestoreDBInstanceFromS3",
+        "rds:RestoreDBClusterToPointInTime",
+        "rds:RestoreDBClusterFromS3",
+        "rds:RestoreDBClusterFromDBSnapshot",
+        "rds:CreateDBInstance",
+        "rds:CreateDBCluster"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "Bool": {
+          "rds:StorageEncrypted": [
+            "false"
+          ]
+        }
+      }
+    },
+    {
+      "Sid": "DenyLocalIamUserChanges",
+      "Effect": "Deny",
+      "Action": [
+        "iam:CreateUser",
+        "iam:CreateAccessKey"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
